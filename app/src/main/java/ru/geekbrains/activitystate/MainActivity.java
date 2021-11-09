@@ -11,8 +11,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int counter1 = 0;
-    private int counter2 = 0;
+    private Counters counters;
+
     private TextView textCounter1;
     private TextView textCounter2;
 
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        counters = new Counters();
         initViews();
     }
 
@@ -34,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counter2++;
-                setTextCounter(textCounter2, counter2);
+                counters.incrementCounter2();
+                setTextCounter(textCounter2, counters.getCounter2());
             }
         });
     }
 
     public void button1_onClick(View view) {
-        counter1++;
-        setTextCounter(textCounter1, counter1);
+        counters.incrementCounter1();
+        setTextCounter(textCounter1, counters.getCounter1());
     }
 
     private void setTextCounter(TextView textCounter1, int counter1) {
