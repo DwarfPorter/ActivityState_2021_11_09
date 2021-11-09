@@ -11,6 +11,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private final static String KEY_COUNTERS = "Counters";
+
     private Counters counters;
 
     private TextView textCounter1;
@@ -76,4 +78,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setTextCounter(textCounter4, counters.getCounter4());
         }
     };
+
+    @Override
+    public void onSaveInstanceState(Bundle instanceState) {
+        super.onSaveInstanceState(instanceState);
+        instanceState.putSerializable(KEY_COUNTERS, counters);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle instanceState){
+        super.onRestoreInstanceState(instanceState);
+        counters = (Counters) instanceState.getSerializable(KEY_COUNTERS);
+        setTextCounters();
+    }
+
+    private void setTextCounters(){
+        setTextCounter(textCounter1, counters.getCounter1());
+        setTextCounter(textCounter2, counters.getCounter2());
+        setTextCounter(textCounter3, counters.getCounter3());
+        setTextCounter(textCounter4, counters.getCounter4());
+    }
 }
